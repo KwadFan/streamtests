@@ -130,3 +130,4 @@ sudo reboot
     ![go2rtc-api](./assets/go2rtc-api.png)
 
 Did you see that page? Fine. We are finished with the preparation.
+Hit `CTRL+c` to kill go2rtc
