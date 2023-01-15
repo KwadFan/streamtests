@@ -131,3 +131,42 @@ sudo reboot
 
 Did you see that page? Fine. We are finished with the preparation.
 Hit `CTRL+c` to kill go2rtc
+
+## PoC
+
+Will upload the finished script at some point for now as easy entry point use that.
+
+Create a file called run.sh in your home directory and edit it.
+
+`nano run.sh` should do it for now
+
+```bash
+#!/bin/bash
+
+USTREAMER_BIN="${HOME}/ustreamer/ustreamer"
+GO2RTC_BIN="${HOME}/go2rtc_linux_arm64"
+
+CAM="/dev/video2"
+USTREAMER_ARGS=(--host :: --device "${CAM}" --format=MJPEG)
+
+
+
+run_ustreamer(){
+    "${USTREAMER_BIN}" "${USTREAMER_ARGS[@]}" &
+}
+
+run_go2rtc(){
+   "${GO2RTC_BIN}" &
+}
+
+run_ustreamer
+run_go2rtc
+
+while true; do
+   sleep 1
+done
+```
+
+This launches ustreamer and go2rtc, use your browser to play around with.
+
+webrtc, mse and mp4 are not working currently, have to find a way to get h264 encoded stream
